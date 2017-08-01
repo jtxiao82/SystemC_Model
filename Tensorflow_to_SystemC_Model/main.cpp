@@ -84,13 +84,10 @@ SC_MODULE(Input) {
           if(param_0.size() < param_1.size()) {
             o_param0_channel.write(param_0[0]);
             o_param1_channel.write(param_1[0+count-1]);
-            cout << "Test0" << endl;
           } else {
             o_param0_channel.write(param_0[0+count-1]);
             o_param1_channel.write(param_1[0]);
-            cout << "Test1" << endl;
           }
-          cout << endl;
         }
         o_input_valid.write(true);
         do {
@@ -162,8 +159,10 @@ SC_MODULE(Cal) {
       while(1) {
         wait(event);
         count++;
-        if(count >= 2) // End count
-	  cout << "Result: " << param0[0] * param1[0] << endl;
+        result = param0[0] * param1[0];
+        if(count >= 2) // Counter should be bigger than 2
+	  cout << "Result: " << result << endl;
+          cout << endl;
       }
     }
 
@@ -172,6 +171,7 @@ SC_MODULE(Cal) {
     int count;
     float param0[5];
     float param1[5];
+    float result;
 
     sc_in_clk i_clk;
 
