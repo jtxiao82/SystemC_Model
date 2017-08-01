@@ -43,10 +43,12 @@ SC_MODULE(Input) {
       while (1) {
         // get a message
         memset (buf, '\0', sizeof (buf));
-        if ((bytes_read = read (fd, buf, sizeof (buf))) == -1)
+        /*if ((bytes_read = read (fd, buf, sizeof (buf))) == -1)
           perror ("read");
         if (bytes_read == 0)
-          continue;
+          continue;*/
+
+        bytes_read = read (fd, buf, sizeof (buf));
 
         if (bytes_read > 0) {
           return_fifo = strtok (buf, ", \n");
